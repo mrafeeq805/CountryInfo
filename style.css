@@ -1,0 +1,55 @@
+.header{
+    border: 1px black solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo > img{
+    height: 100px;
+}
+
+.navigation > ul {
+    display: flex;
+}
+.navigation > ul > li {
+    padding: 20px;
+    list-style: none;
+}
+.container{
+    display: flex;
+    gap: 10px;
+    margin: 20px 10px;
+}
+.card{
+    width: max-content;
+    padding: 5px;
+    box-shadow: inset;
+    border: .5px gray solid;
+}
+.thumb > img{
+    border-radius: 20px;
+    height: 200px;
+    width: 260px;
+}
+.heading{
+    display: block;
+    color: black;
+    font-size:x-large;
+    font-weight: 800;
+}
+.sub{
+    color: gray;
+    font-size:large;
+    font-weight: 800;
+}
+.cont{
+    display:flex;
+    gap: 10px;
+}
+
+.cuisenes{
+    display: block;
+    color: gray;
+    font-size:large;
+    font-weight: 100;
+}
