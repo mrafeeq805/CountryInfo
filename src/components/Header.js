@@ -1,20 +1,25 @@
 import { LOGO } from "../utils/constants"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 const Header = () =>{
     const [value,setValue] = useState('Login')
     return (
-         <div className='header'>
-              <div className='logo'>
-                 <img src={LOGO} alt='logo'/>
+         <div className='w-full flex justify-between px-5 items-center bg-slate-100'>
+              <div className='h-16'>
+                 <img className="h-full" src={LOGO} alt='logo'/>
               </div>
-              <div className='navigation'>
-                 <ul >
-                     <li>Home</li>
-                     <li>About Us</li>
-                     <li>Contact Us</li>
-                     <li>Cart</li>
-                     <li>Profile</li>
+              <div className='w-full'>
+                 <ul className="flex w-full gap-12 justify-end items-center">
+                     <li>
+                        <Link to='/'>Home</Link>
+                    </li>
+                    <li>
+                        <Link to='/aboutus'>About us</Link>
+                    </li>
+                    <li>
+                        <Link to='/contactus'>Contact us</Link>
+                    </li>
                      <button onClick={()=>{
                        value === 'Login' ? setValue("Logout") : setValue("Login")
                      }}>{value}</button>

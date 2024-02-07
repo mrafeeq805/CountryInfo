@@ -1,62 +1,87 @@
 import Card from '../components/Card'
-import data from '../utils/data'
+
 import { useState,useEffect } from 'react'
+import Shimmer from './Shimmer'
+
 
 
 
 const CardsContainer = () => {
-    const [list,setData] = useState(data)
-    const [filterList,setFilterList] = useState(data)
+    const [list,setData] = useState([])
+    const [filterList,setFilterList] = useState([])
     const [searcText,setSearchText] = useState('')
+    const [link,setLink] = useState('https://restcountries.com/v3.1/all')
+    const regionslist = ["Europe","Asia","Africa","Antarctic","Americas","Oceania"]
 
     useEffect(()=>{
         fetchData()
     },([]))
 
     const fetchData = async () =>{
-        // const datas = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING')
-        // const jso = await datas.json()
-        // console.log(jso);
-        setData(data)
-    }
-    console.log(filterList);
 
+        const url = link;
+        const options = {
+            method: 'GET',
+        };
+        
+        try {
+            const response = await fetch(url, options);
+            const result = await response.json();
+            setData(result)
+            setFilterList(result)
+            
+        } catch (error) {
+            
+        }
+    }
+    if(list.length === 0){
+        return <Shimmer/>
+    }
     return (
-        <div className='body'>
-            <div>
-                <input
-                    type="text"
-                    value={searcText}
-                    onChange={(e)=>{
+        <div className=''>
+            <div className='w-full flex justify-between my-5 px-5'>
+                {/* search */}
+            <div className='flex gap-3 w-2/4'>
+                <input placeholder='   search countries' className='border-2 rounded-md w-2/3' type="text" value={searcText} onChange={(e)=>{
                         setSearchText(e.target.value)
                     }}
                 />
-                <button
-                    onClick={()=>{
+                <button className='material-symbols-outlined text-gray-500' onClick={()=>{
                         const searchdata = list.filter(item=>
 
-                            item.name.toLowerCase().includes(searcText.toLowerCase())
+                            item.name.common.toLowerCase().includes(searcText.toLowerCase())
 
                         )
-                        console.log(searchdata);
                         setFilterList(searchdata)
                     }}
                 >
                     search
                 </button>
             </div>
-            <div>
-                <button className='filter-btn' onClick={()=>{
-                    const filtered = list.filter(item=>item.avgRating > 4)
-                    setFilterList(filtered)
+            {/* filter */}
+            <div className='flex gap-4'>
+                <select onChange={(e)=>{
+                    let filt = list.filter(item=>item.region === e.target.value)
+                    if(filt.length === 0){
+                        filt = list
                     }
-                    
-                }
-                >Top rated cards</button>
+                    setFilterList(filt)
+                }} className='border-2 rounded-lg py-2 px-10'>
+                    <option value={'All Regions'}>Select Region</option>
+                    <option value={'Asia'}>Asia</option>
+                    <option value={'Americas'}>Americas</option>
+                    <option value={'Africa'}>Africa</option>
+                    <option value={'Antarctic'}>Antarctic</option>
+                    <option value={'Europe'}>Europe</option>
+                    <option value={'Oceania'}>Oceania</option>
+                </select>
+                
             </div>
-            <div className='container'>
+            </div>
+            
+            <div className='w-full grid grid-cols-7 gap-5 px-3'>
                 {
-                    filterList.map(item=> <Card key={item.id} data={item} />)
+                    filterList.map((item,index)=> <Card key={index} data={item} />)
                 }
             </div>
 
