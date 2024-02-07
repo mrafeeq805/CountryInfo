@@ -1,27 +1,19 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import Shimmer from "./Shimmer"
+import useGetDetails from '../utils/useGetDetails'
+import useGetOnlineStatus from "../utils/useGetOnlineStatus"
+
+
 const CountryDetails = () => {
-    const [details,setDetails] = useState({})
+    
     const {name} = useParams()
-    useEffect(()=>{
-        fetchData()
-    },([]))
-
-    const fetchData = async () =>{
-
-        const response =  await fetch('https://restcountries.com/v3.1/name/'+name+'?fullText=true');
-        const datas =  await response.json()
-
-        setDetails(datas[0])
-        
-    }
+    const details = useGetDetails(name)
     if(Object.keys(details).length === 0){
         return(
             <Shimmer/>
         )
     }
-    console.log(details);
     return (
         <div className="h-full flex flex-col items-center px-32 justify-center mt-5">
 

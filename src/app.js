@@ -1,14 +1,16 @@
-import React from 'react'
+import React,{lazy,Suspense} from 'react'
 import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import { createBrowserRouter,RouterProvider,Outlet } from 'react-router-dom';
 import CardsContainer from './components/CardContainer';
-import Aboutus from './components/Aboutus';
+//import Aboutus from './components/Aboutus';
 import Contactus from './components/Contactus';
 import Error404 from './components/Error404';
 import RestaurentDetails from './components/CountryDetails';
+import Shimmer from './components/Shimmer';
 
 
+const Aboutus = lazy(()=>import('./components/Aboutus'))
 const AppLayout = () =>{
    return (
         <div className='w-full'>
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/aboutus',
-                element : <Aboutus/>
+                element : <Suspense fallback={"hello"}><Aboutus/></Suspense>
             },
             {
                 path:'/contactus',

@@ -2,6 +2,7 @@ import Card from '../components/Card'
 
 import { useState,useEffect } from 'react'
 import Shimmer from './Shimmer'
+import useGetOnlineStatus from '../utils/useGetOnlineStatus'
 
 
 
@@ -18,7 +19,7 @@ const CardsContainer = () => {
     },([]))
 
     const fetchData = async () =>{
-
+        
         const url = link;
         const options = {
             method: 'GET',
@@ -33,6 +34,11 @@ const CardsContainer = () => {
         } catch (error) {
             
         }
+    }
+
+    const status = useGetOnlineStatus()
+    if(status === "Offline"){
+        return <h1>Looks like you are not connected to internet</h1>
     }
     if(list.length === 0){
         return <Shimmer/>
