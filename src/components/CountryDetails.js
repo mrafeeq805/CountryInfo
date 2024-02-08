@@ -52,6 +52,11 @@ const CountryDetails = () => {
                     <span className="text-gray-500">Sub Region</span>
                     <span>{details.subregion}</span>
                 </div>
+                <div className="flex flex-col">
+                    <span className="text-gray-500">Languages</span>
+                    <span>{Object.values(details.languages).join(',')}</span>
+                    
+                </div>
             </div>
 
         </div>

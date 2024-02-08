@@ -5,7 +5,7 @@ const Card = (props) => {
     const {name,flags,capital,population} = props.data
     return (
 
-        <div className='border-2 shadow-lg'>
+        <div className=' rounded-lg shadow-lg bg-slate-100'>
             <Link to={"/details/"+name.common}>
                 <div className='h-32'>
                     <img className="h-full w-full object-cover" src={flags.png} alt='thumb' />
@@ -19,5 +19,16 @@ const Card = (props) => {
             
         </div>
     )
+}
+
+export const UnMemberCard = (Card) =>{
+    return(props)=>{
+        return (
+            <div>
+                <label className="bg-black text-white absolute text-sm w-max p-1">UN Member</label>
+                <Card {...props}/>
+            </div>
+        )
+    }
 }
 export default Card

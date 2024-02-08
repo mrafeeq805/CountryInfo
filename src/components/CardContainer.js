@@ -3,9 +3,10 @@ import Card from '../components/Card'
 import { useState,useEffect } from 'react'
 import Shimmer from './Shimmer'
 import useGetOnlineStatus from '../utils/useGetOnlineStatus'
+import { UnMemberCard } from '../components/Card'
 
 
-
+const UNMemberCard = UnMemberCard(Card)
 
 const CardsContainer = () => {
     const [list,setData] = useState([])
@@ -87,7 +88,9 @@ const CardsContainer = () => {
             
             <div className='w-full grid grid-cols-7 gap-5 px-3'>
                 {
-                    filterList.map((item,index)=> <Card key={index} data={item} />)
+                    filterList.map((item,index)=> 
+                        !item.unMember ? <Card key={index} data={item}/>:<UNMemberCard key={index} data={item}/>
+                    )
                 }
             </div>
 
