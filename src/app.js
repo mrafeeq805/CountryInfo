@@ -9,6 +9,9 @@ import Error404 from './components/Error404';
 import RestaurentDetails from './components/CountryDetails';
 import Shimmer from './components/Shimmer';
 import UserContext from './utils/UserContext';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
+import Favorites from './components/Favorites';
 
 
 const Aboutus = lazy(()=>import('./components/Aboutus'))
@@ -16,16 +19,17 @@ const AppLayout = () =>{
     const [name,setName] = useState('')
     useEffect(()=>{
         setName('ra')
-        console.log('hello');
     },[])
    return (
-            
-        <UserContext.Provider value={{user:name, setName}}>
-            <div className="app">
-                <Header />
-                <Outlet />
-            </div>
-        </UserContext.Provider>
+        <Provider store={appStore}>
+            <UserContext.Provider value={{user:name, setName}}>
+                <div className="app">
+                    <Header />
+                    <Outlet />
+                </div>
+            </UserContext.Provider>
+        </Provider>  
+        
     
         
     )
@@ -51,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path:'/details/:name',
                 element : <RestaurentDetails/>
+            },
+            {
+                path:'/favorites',
+                element : <Favorites/>
             },
         ],
         errorElement : <Error404/>

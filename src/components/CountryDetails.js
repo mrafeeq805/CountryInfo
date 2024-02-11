@@ -4,6 +4,8 @@ import Shimmer from "./Shimmer"
 import useGetDetails from '../utils/useGetDetails'
 import useGetOnlineStatus from "../utils/useGetOnlineStatus"
 import UserContext from "../utils/UserContext"
+import { useDispatch } from "react-redux"
+import { addFavorite,removeFavorite,clearFavorite } from "../utils/favoriteSlice"
 
 
 const CountryDetails = () => {
@@ -11,7 +13,10 @@ const CountryDetails = () => {
     
     const {name} = useParams()
     const details = useGetDetails(name)
-    console.log(details);
+    const dispatch = useDispatch()
+    const addHandler = (item) =>{
+        dispatch(addFavorite(item))
+    }
     if(Object.keys(details).length === 0){
         return(
             <Shimmer/>
@@ -26,6 +31,10 @@ const CountryDetails = () => {
             
             <span className="text-2xl ">{details.name.common}</span>
             <div className="h-[1px] bg-gray-200 w-full mt-2"></div>
+            <button className="p-2 bg-slate-500 text-white"
+            onClick={()=>{
+                addHandler(details)
+            }}>Add to Favorites</button>
             <div className="grid grid-cols-4 w-full  gap-5 mt-5">
                 <div className="flex flex-col">
                     <span className="text-gray-500 ">Area</span>
