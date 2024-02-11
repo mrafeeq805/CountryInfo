@@ -1,4 +1,4 @@
-import React,{lazy,Suspense} from 'react'
+import React,{lazy,Suspense,useEffect,useState} from 'react'
 import ReactDOM from 'react-dom/client';
 import Header from './components/Header';
 import { createBrowserRouter,RouterProvider,Outlet } from 'react-router-dom';
@@ -8,15 +8,26 @@ import Contactus from './components/Contactus';
 import Error404 from './components/Error404';
 import RestaurentDetails from './components/CountryDetails';
 import Shimmer from './components/Shimmer';
+import UserContext from './utils/UserContext';
 
 
 const Aboutus = lazy(()=>import('./components/Aboutus'))
 const AppLayout = () =>{
+    const [name,setName] = useState('')
+    useEffect(()=>{
+        setName('ra')
+        console.log('hello');
+    },[])
    return (
-        <div className='w-full'>
-            <Header/>
-            <Outlet/>
-        </div>
+            
+        <UserContext.Provider value={{user:name, setName}}>
+            <div className="app">
+                <Header />
+                <Outlet />
+            </div>
+        </UserContext.Provider>
+    
+        
     )
 }
 const router = createBrowserRouter([

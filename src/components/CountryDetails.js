@@ -1,14 +1,17 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState,useContext } from "react"
 import Shimmer from "./Shimmer"
 import useGetDetails from '../utils/useGetDetails'
 import useGetOnlineStatus from "../utils/useGetOnlineStatus"
+import UserContext from "../utils/UserContext"
 
 
 const CountryDetails = () => {
+    const {user} = useContext(UserContext)
     
     const {name} = useParams()
     const details = useGetDetails(name)
+    console.log(details);
     if(Object.keys(details).length === 0){
         return(
             <Shimmer/>
@@ -55,7 +58,7 @@ const CountryDetails = () => {
                 <div className="flex flex-col">
                     <span className="text-gray-500">Languages</span>
                     <span>{Object.values(details.languages).join(',')}</span>
-                    
+                    <span>{user}</span>
                 </div>
             </div>
 

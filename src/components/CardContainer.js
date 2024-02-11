@@ -1,14 +1,16 @@
 import Card from '../components/Card'
 
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import Shimmer from './Shimmer'
 import useGetOnlineStatus from '../utils/useGetOnlineStatus'
 import { UnMemberCard } from '../components/Card'
+import UserContext from '../utils/UserContext'
 
 
 const UNMemberCard = UnMemberCard(Card)
 
 const CardsContainer = () => {
+
     const [list,setData] = useState([])
     const [filterList,setFilterList] = useState([])
     const [searcText,setSearchText] = useState('')
@@ -44,8 +46,10 @@ const CardsContainer = () => {
     if(list.length === 0){
         return <Shimmer/>
     }
+
     return (
         <div className=''>
+            
             <div className='w-full flex justify-between my-5 px-5'>
                 {/* search */}
             <div className='flex gap-3 w-2/4'>

@@ -1,9 +1,11 @@
 import { LOGO } from "../utils/constants"
-import { useState } from "react"
+import { useState,useContext } from "react"
 import { Link } from "react-router-dom"
 import useGetOnlineStatus from "../utils/useGetOnlineStatus"
+import UserContext from "../utils/UserContext"
 
 const Header = () =>{
+    const { user, setName } = useContext(UserContext)
 
     const [value,setValue] = useState('Login')
     const status = useGetOnlineStatus()
@@ -13,7 +15,9 @@ const Header = () =>{
                  <img className="h-full" src={LOGO} alt='logo'/>
               </div>
               <div className='w-full'>
+              <input className='border-2 rounded-lg p-2' onChange={(e)=>setName(e.target.value)} value={user}/>
                  <ul className="flex w-full gap-12 justify-end items-center">
+                    
                     <li className={status === 'Online'?'text-green-500':'text-red-500'}>
                         {status === 'Online'? "Online" : "Offline"}
                     </li>
@@ -30,6 +34,9 @@ const Header = () =>{
                      <button onClick={()=>{
                        value === 'Login' ? setValue("Logout") : setValue("Login")
                      }}>{value}</button>
+                    <li>
+                        {user}
+                    </li>
                  </ul>
               </div>
               
