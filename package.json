@@ -2,7 +2,7 @@
   "name": "react-sample",
   "version": "1.0.0",
   "description": "react sample app",
-  "source": "index.html",
+  "main": "app.js",
   "scripts": {
     "start": "npx parcel index.html",
     "build": "npx parcel build index.html",
