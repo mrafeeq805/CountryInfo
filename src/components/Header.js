@@ -28,21 +28,11 @@ const Header = () =>{
                         <Link to='/'>Home</Link>
                     </li>
 
-                    <li>
-                        <Link to='/aboutus'>About us</Link>
-                    </li>
-                    <li>
-                        <Link to='/contactus'>Contact us</Link>
-                    </li>
+                    
                     <li className="font-bold">
                         <Link to='/favorites'>Favorites ({fav.length})</Link>
                     </li>
-                     <button onClick={()=>{
-                       value === 'Login' ? setValue("Logout") : setValue("Login")
-                     }}>{value}</button>
-                    <li>
-                        {user}
-                    </li>
+                     
                  </ul>
               </div>
               
