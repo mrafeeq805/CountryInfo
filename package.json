@@ -2,9 +2,12 @@
   "name": "react-sample",
   "version": "1.0.0",
   "description": "react sample app",
+  "targets": {
+    "main": false
+  }, 
   "scripts": {
-    "start": "node app.js",
-    "build": "npx parcel index.html",
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "keywords": [
